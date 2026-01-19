@@ -4,6 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  ground0:
+    '@ground0/adapter-svelte':
+      specifier: ^0.1.2
+      version: 0.1.2
+    ground0:
+      specifier: ^0.1.2
+      version: 0.1.2
+
 importers:
 
   .:
@@ -43,6 +52,13 @@ importers:
         version: 5.9.3
 
   packages/web:
+    dependencies:
+      '@ground0/adapter-svelte':
+        specifier: catalog:ground0
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      ground0:
+        specifier: catalog:ground0
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
     devDependencies:
       '@libsql/client':
         specifier: ^0.15.15
@@ -881,6 +897,29 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@ground0/adapter-svelte@0.1.2':
+    resolution: {integrity: sha512-blLJ+WlhFTCL4eSQyB3PYrldZZHWD4owDDF1mHeNtrR7n8iTqMOMuwQGW75Twh4fEbY9JM6oaikDL6S0rn3Feg==}
+    peerDependencies:
+      typescript: ^5.8.3
+
+  '@ground0/browser@0.1.2':
+    resolution: {integrity: sha512-3jIreC49Ui6hP210TGRSQul2ziaCvB1BUgKNweDkLtkYiHiZS8gUfxsAeso3hGp9BN7qb4uq0bFz08qamHbNmg==}
+    peerDependencies:
+      drizzle-orm: ^0.44.6
+      typescript: ^5.8.3
+
+  '@ground0/durable-object@0.1.2':
+    resolution: {integrity: sha512-yaeYQKWxS/CxCi3RfrYBKdN4y178JlBcPulRFkmI2ftovxpXjhKAfDJYEx8VYuM6rFqkqJc5S6hzL0KgG/G9aw==}
+    peerDependencies:
+      drizzle-orm: ^0.44.6
+      typescript: ^5.8.3
+
+  '@ground0/shared@0.1.2':
+    resolution: {integrity: sha512-K5ALBYHiNOjTvXbLi370VZkIO8eejBl2Hcl6ItOyKTc9EcJoQ2/0VaMk6l+IZonI0WCcO7bjUAmD7utM8UOKnA==}
+    peerDependencies:
+      drizzle-orm: ^0.44.6
+      typescript: ^5.8.3
+
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1288,6 +1327,9 @@ packages:
   '@speed-highlight/core@1.2.14':
     resolution: {integrity: sha512-G4ewlBNhUtlLvrJTb88d2mdy2KRijzs4UhnlrOSRT4bmjh/IqNElZa3zkrZ+TC47TwtlDWzVLFADljF1Ijp5hA==}
 
+  '@sqltools/formatter@1.2.5':
+    resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
+
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
@@ -1617,6 +1659,10 @@ packages:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
     engines: {node: '>=18'}
 
+  copy-anything@4.0.5:
+    resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
+    engines: {node: '>=18'}
+
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -1664,6 +1710,10 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
+
+  dot-prop@10.1.0:
+    resolution: {integrity: sha512-MVUtAugQMOff5RnBy2d9N31iG0lNwg1qAoAOn7pOK5wf94WIaE3My2p3uwTQuvS2AcqchkcR3bHByjaM0mmi7Q==}
+    engines: {node: '>=20'}
 
   drizzle-kit@0.31.8:
     resolution: {integrity: sha512-O9EC/miwdnRDY10qRxM8P3Pg8hXe3LyU4ZipReKOgTwn4OqANmftj8XJz1UPUAS6NMHf0E2htjsbQujUTkncCg==}
@@ -1760,6 +1810,12 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-query-logger@1.1.2:
+    resolution: {integrity: sha512-/VyJOlC5BDnENuhdQws1CfKwBEUK6qycpsZiCmDfEjVc3P/x7vpyY5C9wz/hDkPu/GHAiQPz2OTnpv8/AFEItA==}
+    peerDependencies:
+      drizzle-orm: '>=0.44.3 <1.0.0'
+      typescript: ^5
 
   enhanced-resolve@5.18.4:
     resolution: {integrity: sha512-LgQMM4WXU3QI+SYgEc2liRgznaD5ojbmY3sb8LxyguVkIg5FxdpTkvk72te2R38/TGKxH634oLxXRGY6d7AP+Q==}
@@ -1954,6 +2010,12 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
+  ground0@0.1.2:
+    resolution: {integrity: sha512-Szv8zIPdqy4Bqhr7qNz7+iPXHLsG8TaUazO3ZchZGpu9O54cIFU3UTucxL/q37bCcB0NUJV7wG459DpP79rflQ==}
+    peerDependencies:
+      drizzle-orm: ^0.44.6
+      typescript: ^5.8.3
+
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -2000,6 +2062,10 @@ packages:
   is-subdir@1.2.0:
     resolution: {integrity: sha512-2AT6j+gXe/1ueqbW6fLZJiIw3F8iXGJtt0yDrZaBhAZEG1raiTxKWU+IPqMCzQAXOUCKdA4UDMgacKH25XG2Cw==}
     engines: {node: '>=4'}
+
+  is-what@5.5.0:
+    resolution: {integrity: sha512-oG7cgbmg5kLYae2N5IVd3jm2s+vldjxJzK1pcu9LfpGuQ93MQSzo0okvRna+7y5ifrD+20FE8FvjusyGaz14fw==}
+    engines: {node: '>=18'}
 
   is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
@@ -2470,6 +2536,10 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
+  superjson@2.2.6:
+    resolution: {integrity: sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==}
+    engines: {node: '>=16'}
+
   supports-color@10.2.2:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
@@ -2489,6 +2559,10 @@ packages:
   svelte@5.47.1:
     resolution: {integrity: sha512-MhSWfWEpG5T57z0Oyfk9D1GhAz/KTZKZZlWtGEsy9zNk2fafpuU7sJQlXNSA8HtvwKxVC9XlDyl5YovXUXjjHA==}
     engines: {node: '>=18'}
+
+  tagged-tag@1.0.0:
+    resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
+    engines: {node: '>=20'}
 
   tailwindcss@4.1.18:
     resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
@@ -2559,6 +2633,10 @@ packages:
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
+
+  type-fest@5.4.1:
+    resolution: {integrity: sha512-xygQcmneDyzsEuKZrFbRMne5HDqMs++aFzefrJTgEIKjQ3rekM+RPfFCVq2Gp1VIDqddoYeppCj4Pcb+RZW0GQ==}
+    engines: {node: '>=20'}
 
   typescript-eslint@8.53.1:
     resolution: {integrity: sha512-gB+EVQfP5RDElh9ittfXlhZJdjSU4jUSTyE2+ia8CYyNvet4ElfaLlAIqDvQV9JPknKx0jQH1racTYe/4LaLSg==}
@@ -2649,6 +2727,10 @@ packages:
       vite:
         optional: true
 
+  wa-sqlite@https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz:
+    resolution: {tarball: https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz}
+    version: 1.0.9
+
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
@@ -2705,6 +2787,9 @@ packages:
       utf-8-validate:
         optional: true
 
+  xstate@5.25.1:
+    resolution: {integrity: sha512-oyvsNH5pF2qkHmiHEMdWqc3OjDtoZOH2MTAI35r01f/ZQWOD+VLOiYqo65UgQET0XMA5s9eRm8fnsIo+82biEw==}
+
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
@@ -2720,6 +2805,9 @@ packages:
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+  zod@4.3.5:
+    resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
 
 snapshots:
 
@@ -3271,6 +3359,44 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
+  '@ground0/adapter-svelte@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+    dependencies:
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      dot-prop: 10.1.0
+      svelte: 5.47.1
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - drizzle-orm
+
+  '@ground0/browser@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+    dependencies:
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      superjson: 2.2.6
+      typescript: 5.9.3
+      wa-sqlite: https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz
+      xstate: 5.25.1
+
+  '@ground0/durable-object@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+    dependencies:
+      '@cloudflare/workers-types': 4.20260118.0
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      drizzle-query-logger: 1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      semver: 7.7.3
+      superjson: 2.2.6
+      typescript: 5.9.3
+
+  '@ground0/shared@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+    dependencies:
+      '@cloudflare/workers-types': 4.20260118.0
+      '@standard-schema/spec': 1.1.0
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      semver: 7.7.3
+      typescript: 5.9.3
+      zod: 4.3.5
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -3594,6 +3720,8 @@ snapshots:
 
   '@speed-highlight/core@1.2.14': {}
 
+  '@sqltools/formatter@1.2.5': {}
+
   '@standard-schema/spec@1.1.0': {}
 
   '@sveltejs/acorn-typescript@1.0.8(acorn@8.15.0)':
@@ -3915,6 +4043,10 @@ snapshots:
 
   cookie@1.1.1: {}
 
+  copy-anything@4.0.5:
+    dependencies:
+      is-what: 5.5.0
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -3945,6 +4077,10 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
+  dot-prop@10.1.0:
+    dependencies:
+      type-fest: 5.4.1
+
   drizzle-kit@0.31.8:
     dependencies:
       '@drizzle-team/brocli': 0.10.2
@@ -3958,6 +4094,12 @@ snapshots:
     optionalDependencies:
       '@cloudflare/workers-types': 4.20260118.0
       '@libsql/client': 0.15.15
+
+  drizzle-query-logger@1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3):
+    dependencies:
+      '@sqltools/formatter': 1.2.5
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      typescript: 5.9.3
 
   enhanced-resolve@5.18.4:
     dependencies:
@@ -4270,6 +4412,14 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
+  ground0@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3):
+    dependencies:
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/durable-object': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      typescript: 5.9.3
+
   has-flag@4.0.0: {}
 
   human-id@4.1.3: {}
@@ -4304,6 +4454,8 @@ snapshots:
   is-subdir@1.2.0:
     dependencies:
       better-path-resolve: 1.0.0
+
+  is-what@5.5.0: {}
 
   is-windows@1.0.2: {}
 
@@ -4707,6 +4859,10 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
+  superjson@2.2.6:
+    dependencies:
+      copy-anything: 4.0.5
+
   supports-color@10.2.2: {}
 
   supports-color@7.2.0:
@@ -4742,6 +4898,8 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.21
       zimmerframe: 1.1.4
+
+  tagged-tag@1.0.0: {}
 
   tailwindcss@4.1.18: {}
 
@@ -4798,6 +4956,10 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
+  type-fest@5.4.1:
+    dependencies:
+      tagged-tag: 1.0.0
+
   typescript-eslint@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/eslint-plugin': 8.53.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
@@ -4852,6 +5014,8 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)
 
+  wa-sqlite@https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz: {}
+
   web-streams-polyfill@3.3.3: {}
 
   which@2.0.2:
@@ -4894,6 +5058,8 @@ snapshots:
 
   ws@8.19.0: {}
 
+  xstate@5.25.1: {}
+
   yocto-queue@0.1.0: {}
 
   youch-core@0.3.3:
@@ -4912,3 +5078,5 @@ snapshots:
   zimmerframe@1.1.4: {}
 
   zod@3.25.76: {}
+
+  zod@4.3.5: {}
