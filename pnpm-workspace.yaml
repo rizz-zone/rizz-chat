@@ -1,8 +1,8 @@
 packages:
-  - 'packages/*'
+  - "packages/*"
 catalogs:
   ground0:
     ground0: ^0.1.2
-    '@ground0/adapter-svelte': ^0.1.2
+    "@ground0/adapter-svelte": ^0.1.2
 onlyBuiltDependencies:
   - esbuild
