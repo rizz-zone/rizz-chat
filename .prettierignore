@@ -1,0 +1,19 @@
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+package.json
+yarn.lock
+bun.lockb
+bun.lock
+
+# Generated files
+dist/
+drizzle/
+.svelte-kit/
+build/
+worker-configuration.d.ts
+generated/
+.wrangler/
+
+# IDE and tool-generated files
+.claude/
