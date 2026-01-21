@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@ground0/adapter-svelte": "catalog:ground0",
-    "ground0": "catalog:ground0"
+    "ground0": "catalog:ground0",
+    "svelte-bootstrap-icons": "^3.3.0"
   },
   "devDependencies": {
     "@libsql/client": "^0.15.15",

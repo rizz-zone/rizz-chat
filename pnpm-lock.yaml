@@ -68,6 +68,9 @@ importers:
       ground0:
         specifier: catalog:ground0
         version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      svelte-bootstrap-icons:
+        specifier: ^3.3.0
+        version: 3.3.0
     devDependencies:
       '@libsql/client':
         specifier: ^0.15.15
@@ -2610,6 +2613,9 @@ packages:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
 
+  svelte-bootstrap-icons@3.3.0:
+    resolution: {integrity: sha512-45aETbpKqrogpxuj2FAJ3vgIn47DZqqsyMtp7S+iRtX99W7zmFB7rgLrCa2ZtlhJavWOUR/gesRSiJeaVg4vVw==}
+
   svelte-check@4.3.5:
     resolution: {integrity: sha512-e4VWZETyXaKGhpkxOXP+B/d0Fp/zKViZoJmneZWe/05Y2aqSKj3YN2nLfYPJBQ87WEiY4BQCQ9hWGu9mPT1a1Q==}
     engines: {node: '>= 18.0.0'}
@@ -4989,6 +4995,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  svelte-bootstrap-icons@3.3.0: {}
 
   svelte-check@4.3.5(picomatch@4.0.3)(svelte@5.47.1)(typescript@5.9.3):
     dependencies:
