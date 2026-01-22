@@ -1,0 +1,32 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "chat-api",
+	"compatibility_date": "2026-01-19",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "src/index.ts",
+
+	// Durable Objects
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "CHAT_ROOM",
+				"class_name": "ChatRoom"
+			}
+		]
+	},
+
+	// Migrations for Durable Objects
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_classes": ["ChatRoom"]
+		}
+	],
+
+	"vars": {
+		// For JWKS purposes
+		"AUTH_URL": "http://localhost:5173",
+		// For CORS purposes
+		"CORS_ORIGIN": "http://localhost:5173"
+	}
+}

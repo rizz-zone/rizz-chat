@@ -10,4 +10,11 @@
   },
   "workers_dev": false,
   "preview_urls": true,
+  // Environment variables (set via wrangler secret for production)
+  "vars": {
+    "APP_URL": "http://localhost:5173",
+    "PUBLIC_APP_URL": "http://localhost:5173",
+    "API_URL": "http://localhost:8787",
+    "PUBLIC_API_URL": "http://localhost:8787",
+  },
 }

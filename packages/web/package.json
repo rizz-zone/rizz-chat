@@ -12,6 +12,7 @@
     "prepare": "pnpm run types && svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "check-types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "types": "wrangler types",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@ground0/adapter-svelte": "catalog:ground0",
+    "better-auth": "^1.4.17",
     "ground0": "catalog:ground0",
     "svelte-bootstrap-icons": "^3.3.0"
   },

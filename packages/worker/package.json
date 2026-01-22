@@ -1,10 +1,23 @@
 {
-    "name": "@rizz-zone/chat-worker",
-    "version": "0.1.0",
-    "private": true,
-    "license": "SEE LICENSE IN LICENSE.md",
-    "packageManager": "pnpm@10.28.1",
-    "peerDependencies": {
-        "typescript": "^5.7.3"
-    }
+  "name": "@rizz-zone/chat-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy",
+    "check-types": "tsc --noEmit",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "jose": "^6.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.56.0"
+  }
 }
