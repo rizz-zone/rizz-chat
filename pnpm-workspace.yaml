@@ -8,7 +8,10 @@ catalogs:
   ground0:
     '@ground0/adapter-svelte': ^0.1.2
     ground0: ^0.1.2
+  wrangler:
+    wrangler: ^4.60.0
   zod:
     zod: ^3.24.2
+
 onlyBuiltDependencies:
   - esbuild

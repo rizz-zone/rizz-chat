@@ -1,0 +1,8 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "rizz-chat-do-backend",
+	"compatibility_date": "2026-01-19",
+	"main": "src/index.ts",
+	"workers_dev": false,
+	"preview_urls": true
+}

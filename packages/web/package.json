@@ -21,7 +21,8 @@
   "dependencies": {
     "@ground0/adapter-svelte": "catalog:ground0",
     "drizzle-orm": "catalog:drizzle",
-    "zod": "catalog:zod"
+    "zod": "catalog:zod",
+    "@rizz-zone/chat-worker": "workspace:*"
   },
   "devDependencies": {
     "@libsql/client": "^0.15.15",
@@ -40,6 +41,6 @@
     "typescript": "^5.9.3",
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
-    "wrangler": "^4.56.0"
+    "wrangler": "catalog:wrangler"
   }
 }

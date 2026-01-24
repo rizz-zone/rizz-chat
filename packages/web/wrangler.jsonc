@@ -1,6 +1,6 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
-	"name": "web",
+	"name": "rizz-chat-web",
 	"compatibility_date": "2026-01-19",
 	"compatibility_flags": ["nodejs_als"],
 	"main": ".svelte-kit/cloudflare/_worker.js",
@@ -8,6 +8,12 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"services": [
+		{
+			"binding": "DO_BACKEND",
+			"service": "rizz-chat-do-backend"
+		}
+	],
 	"workers_dev": false,
 	"preview_urls": true
 }
