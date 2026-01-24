@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@ground0/adapter-svelte": "catalog:ground0",
-    "ground0": "catalog:ground0"
+    "drizzle-orm": "catalog:drizzle",
+    "zod": "catalog:zod"
   },
   "devDependencies": {
     "@libsql/client": "^0.15.15",
@@ -31,8 +32,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^22",
-    "drizzle-kit": "^0.31.8",
-    "drizzle-orm": "^0.45.0",
+    "drizzle-kit": "catalog:drizzle",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "svelte": "^5.45.6",
     "svelte-check": "^4.3.4",

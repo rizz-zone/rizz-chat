@@ -1,8 +1,14 @@
 packages:
-  - 'packages/*'
+  - packages/*
+
 catalogs:
+  drizzle:
+    drizzle-kit: ^0.31.8
+    drizzle-orm: ^0.45.1
   ground0:
-    ground0: ^0.1.2
     '@ground0/adapter-svelte': ^0.1.2
+    ground0: ^0.1.2
+  zod:
+    zod: ^3.24.2
 onlyBuiltDependencies:
   - esbuild

@@ -4,7 +4,30 @@
     "private": true,
     "license": "SEE LICENSE IN LICENSE.md",
     "packageManager": "pnpm@10.28.1",
+    "type": "module",
     "peerDependencies": {
         "typescript": "^5.7.3"
+    },
+    "dependencies": {
+        "drizzle-orm": "catalog:drizzle",
+        "ground0": "catalog:ground0",
+        "uuidv7": "^1.1.0"
+    },
+    "devDependencies": {
+        "drizzle-kit": "catalog:drizzle",
+        "tsdown": "^0.20.1",
+        "vite-plugin-sql-raw": "^1.0.2"
+    },
+    "scripts": {
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:push": "drizzle-kit push",
+        "db:studio": "drizzle-kit studio",
+        "build": "tsdown",
+        "dev": "tsdown --watch --no-clean"
+    },
+    "exports": {
+        ".": "./dist/index.js",
+        "./package.json": "./package.json"
     }
 }
