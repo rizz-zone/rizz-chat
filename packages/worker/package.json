@@ -19,5 +19,9 @@
     "exports": {
         ".": "./src/type_export.ts",
         "./package.json": "./package.json"
+    },
+    "dependencies": {
+        "@rizz-zone/chat-shared": "workspace:*",
+        "ground0": "catalog:ground0"
     }
 }

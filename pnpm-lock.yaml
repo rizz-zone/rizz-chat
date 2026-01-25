@@ -25,7 +25,7 @@ catalogs:
       version: 4.60.0
   zod:
     zod:
-      specifier: ^3.24.2
+      specifier: ^3.25.76
       version: 3.25.76
 
 importers:
@@ -83,6 +83,9 @@ importers:
       uuidv7:
         specifier: ^1.1.0
         version: 1.1.0
+      zod:
+        specifier: catalog:zod
+        version: 3.25.76
     devDependencies:
       drizzle-kit:
         specifier: catalog:drizzle
@@ -163,6 +166,12 @@ importers:
 
   packages/worker:
     dependencies:
+      '@rizz-zone/chat-shared':
+        specifier: workspace:*
+        version: link:../shared
+      ground0:
+        specifier: catalog:ground0
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
@@ -3760,17 +3769,17 @@ snapshots:
 
   '@ground0/adapter-svelte@0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       dot-prop: 10.1.0
       svelte: 5.47.1
       typescript: 5.9.3
     transitivePeerDependencies:
       - drizzle-orm
 
-  '@ground0/browser@0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/browser@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
       superjson: 2.2.6
       typescript: 5.9.3
@@ -3780,14 +3789,14 @@ snapshots:
   '@ground0/durable-object@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
       '@cloudflare/workers-types': 4.20260118.0
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
       drizzle-query-logger: 1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       semver: 7.7.3
       superjson: 2.2.6
       typescript: 5.9.3
 
-  '@ground0/shared@0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/shared@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
       '@cloudflare/workers-types': 4.20260118.0
       '@standard-schema/spec': 1.1.0
@@ -4920,9 +4929,9 @@ snapshots:
 
   ground0@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3):
     dependencies:
-      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       '@ground0/durable-object': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
       typescript: 5.9.3
 

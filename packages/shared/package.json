@@ -11,7 +11,8 @@
     "dependencies": {
         "drizzle-orm": "catalog:drizzle",
         "ground0": "catalog:ground0",
-        "uuidv7": "^1.1.0"
+        "uuidv7": "^1.1.0",
+        "zod": "catalog:zod"
     },
     "devDependencies": {
         "drizzle-kit": "catalog:drizzle",
@@ -28,6 +29,7 @@
     },
     "exports": {
         ".": "./dist/index.js",
+        "./schema": "./dist/schema.js",
         "./package.json": "./package.json"
     }
 }
