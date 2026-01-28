@@ -1,3 +1,4 @@
+/// <reference path="../worker-configuration.d.ts" />
 import {
 	engineDef,
 	TransitionAction,
@@ -10,6 +11,9 @@ import {
 	SyncEngineBackend,
 	type BackendTransitionHandlers
 } from 'ground0/durable_object'
+
+// Local Env type to avoid conflicts when imported from other packages
+type WorkerEnv = Cloudflare.Env
 
 export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
 	protected override engineDef = engineDef
@@ -24,8 +28,11 @@ export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
 	} satisfies BackendTransitionHandlers<AppTransition>
 }
 
-export default class DOBackend extends WorkerEntrypoint {
-	public override fetch() {
-		return new Response('secret string...')
+export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
+	public override fetch(request: Request) {
+		const id = this.env.USERSPACE.idFromName('temp')
+		const stub = this.env.USERSPACE.get(id)
+
+		return stub.fetch(request)
 	}
 }

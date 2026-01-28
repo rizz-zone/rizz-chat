@@ -20,9 +20,12 @@
   },
   "dependencies": {
     "@ground0/adapter-svelte": "catalog:ground0",
+    "@rizz-zone/chat-shared": "workspace:*",
+    "@rizz-zone/chat-worker": "workspace:*",
     "drizzle-orm": "catalog:drizzle",
-    "zod": "catalog:zod",
-    "@rizz-zone/chat-worker": "workspace:*"
+    "ground0": "catalog:ground0",
+    "wa-sqlite": "https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz",
+    "zod": "catalog:zod"
   },
   "devDependencies": {
     "@libsql/client": "^0.15.15",
@@ -34,6 +37,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^22",
     "drizzle-kit": "catalog:drizzle",
+    "light-my-request": "^6.6.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "svelte": "^5.45.6",
     "svelte-check": "^4.3.4",
@@ -41,6 +45,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
+    "vite-plugin-sveltekit-websockets": "workspace:*",
     "wrangler": "catalog:wrangler"
   }
 }

@@ -73,10 +73,10 @@ importers:
     dependencies:
       drizzle-orm:
         specifier: catalog:drizzle
-        version: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+        version: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
       ground0:
         specifier: catalog:ground0
-        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
@@ -97,17 +97,45 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2(typescript@5.9.3)
 
+  packages/vite-plugin-sveltekit-websockets:
+    dependencies:
+      '@sveltejs/kit':
+        specifier: ^2.0.0
+        version: 2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2))
+      vite:
+        specifier: ^5.0.0 || ^6.0.0 || ^7.0.0
+        version: 7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)
+      ws:
+        specifier: ^8.18.0
+        version: 8.19.0
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20260120.0
+        version: 4.20260128.0
+      '@types/ws':
+        specifier: ^8.18.0
+        version: 8.18.1
+
   packages/web:
     dependencies:
       '@ground0/adapter-svelte':
         specifier: catalog:ground0
-        version: 0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@rizz-zone/chat-shared':
+        specifier: workspace:*
+        version: link:../shared
       '@rizz-zone/chat-worker':
         specifier: workspace:*
         version: link:../worker
       drizzle-orm:
         specifier: catalog:drizzle
-        version: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+        version: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
+      ground0:
+        specifier: catalog:ground0
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      wa-sqlite:
+        specifier: https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz
+        version: https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz
       zod:
         specifier: catalog:zod
         version: 3.25.76
@@ -117,7 +145,7 @@ importers:
         version: 0.15.15
       '@sveltejs/adapter-cloudflare':
         specifier: ^7.2.4
-        version: 7.2.5(@sveltejs/kit@2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(wrangler@4.60.0)
+        version: 7.2.5(@sveltejs/kit@2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(wrangler@4.60.0(@cloudflare/workers-types@4.20260128.0))
       '@sveltejs/kit':
         specifier: ^2.49.1
         version: 2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2))
@@ -139,6 +167,9 @@ importers:
       drizzle-kit:
         specifier: catalog:drizzle
         version: 0.31.8
+      light-my-request:
+        specifier: ^6.6.0
+        version: 6.6.0
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(prettier-plugin-svelte@3.4.1(prettier@3.8.0)(svelte@5.47.1))(prettier@3.8.0)
@@ -160,9 +191,12 @@ importers:
       vite-plugin-devtools-json:
         specifier: ^1.0.0
         version: 1.0.0(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2))
+      vite-plugin-sveltekit-websockets:
+        specifier: workspace:*
+        version: link:../vite-plugin-sveltekit-websockets
       wrangler:
         specifier: catalog:wrangler
-        version: 4.60.0
+        version: 4.60.0(@cloudflare/workers-types@4.20260128.0)
 
   packages/worker:
     dependencies:
@@ -171,14 +205,14 @@ importers:
         version: link:../shared
       ground0:
         specifier: catalog:ground0
-        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+        version: 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
     devDependencies:
       wrangler:
         specifier: catalog:wrangler
-        version: 4.60.0
+        version: 4.60.0(@cloudflare/workers-types@4.20260128.0)
 
 packages:
 
@@ -305,8 +339,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@4.20260118.0':
-    resolution: {integrity: sha512-t+2Q421kAQqwBzMUDvgg2flp8zFVxOpiAyZPbyNcnPxMDHf0z3B7LqBIVQawwI6ntZinbk9f4oUmaA5bGeYwlg==}
+  '@cloudflare/workers-types@4.20260128.0':
+    resolution: {integrity: sha512-oid8qPnF4K5Wmgf66bUUrGycwL8BOCGm9ptQOoQNR/jhY5TmDObLtPjJm+BmDklkpAkaM1FnqKY9lo+FNo78AA==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -2365,6 +2399,9 @@ packages:
     cpu: [x64, arm64, wasm32, arm]
     os: [darwin, linux, win32]
 
+  light-my-request@6.6.0:
+    resolution: {integrity: sha512-CHYbu8RtboSIoVsHZ6Ye4cj4Aw/yg2oAFimlF7mNvfDV192LR7nDiKtSIfCuLT7KokPSTn/9kfVLm5OGN0A28A==}
+
   lightningcss-android-arm64@1.30.2:
     resolution: {integrity: sha512-BH9sEdOCahSgmkVhBLeU7Hc9DWeZ1Eb6wNS6Da8igvUwAe0sqROHddIlvU06q3WyXVEOYDZ6ykBZQnjTbmo4+A==}
     engines: {node: '>= 12.0.0'}
@@ -2699,6 +2736,9 @@ packages:
     resolution: {integrity: sha512-yEPsovQfpxYfgWNhCfECjG5AQaO+K3dp6XERmOepyPDVqcJm+bjyCVO3pmU+nAPe0N5dDvekfGezt/EIiRe1TA==}
     engines: {node: '>=14'}
     hasBin: true
+
+  process-warning@4.0.1:
+    resolution: {integrity: sha512-3c2LzQ3rY9d0hc1emcsHhfT9Jwz0cChib/QN89oME2R451w5fy3f0afAhERFZAwrbDU43wk12d0ORBpDVME50Q==}
 
   promise-limit@2.7.0:
     resolution: {integrity: sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw==}
@@ -3377,7 +3417,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20260120.0':
     optional: true
 
-  '@cloudflare/workers-types@4.20260118.0': {}
+  '@cloudflare/workers-types@4.20260128.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -3767,40 +3807,40 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@ground0/adapter-svelte@0.1.2(drizzle-orm@0.45.1(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/adapter-svelte@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       dot-prop: 10.1.0
       svelte: 5.47.1
       typescript: 5.9.3
     transitivePeerDependencies:
       - drizzle-orm
 
-  '@ground0/browser@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/browser@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
       superjson: 2.2.6
       typescript: 5.9.3
       wa-sqlite: https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz
       xstate: 5.25.1
 
-  '@ground0/durable-object@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/durable-object@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@cloudflare/workers-types': 4.20260118.0
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
-      drizzle-query-logger: 1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@cloudflare/workers-types': 4.20260128.0
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
+      drizzle-query-logger: 1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
       semver: 7.7.3
       superjson: 2.2.6
       typescript: 5.9.3
 
-  '@ground0/shared@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
+  '@ground0/shared@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)':
     dependencies:
-      '@cloudflare/workers-types': 4.20260118.0
+      '@cloudflare/workers-types': 4.20260128.0
       '@standard-schema/spec': 1.1.0
-      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
       semver: 7.7.3
       typescript: 5.9.3
       zod: 4.3.6
@@ -4192,12 +4232,12 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/adapter-cloudflare@7.2.5(@sveltejs/kit@2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(wrangler@4.60.0)':
+  '@sveltejs/adapter-cloudflare@7.2.5(@sveltejs/kit@2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(wrangler@4.60.0(@cloudflare/workers-types@4.20260128.0))':
     dependencies:
-      '@cloudflare/workers-types': 4.20260118.0
+      '@cloudflare/workers-types': 4.20260128.0
       '@sveltejs/kit': 2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2))
       worktop: 0.8.0-next.18
-      wrangler: 4.60.0
+      wrangler: 4.60.0(@cloudflare/workers-types@4.20260128.0)
 
   '@sveltejs/kit@2.50.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.47.1)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2)))(svelte@5.47.1)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.30.2))':
     dependencies:
@@ -4575,15 +4615,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15):
+  drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15):
     optionalDependencies:
-      '@cloudflare/workers-types': 4.20260118.0
+      '@cloudflare/workers-types': 4.20260128.0
       '@libsql/client': 0.15.15
 
-  drizzle-query-logger@1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3):
+  drizzle-query-logger@1.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3):
     dependencies:
       '@sqltools/formatter': 1.2.5
-      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
       typescript: 5.9.3
 
   dts-resolver@2.1.3: {}
@@ -4927,12 +4967,12 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  ground0@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3):
+  ground0@0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3):
     dependencies:
-      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      '@ground0/durable-object': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15))(typescript@5.9.3)
-      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260118.0)(@libsql/client@0.15.15)
+      '@ground0/browser': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/durable-object': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      '@ground0/shared': 0.1.2(drizzle-orm@0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15))(typescript@5.9.3)
+      drizzle-orm: 0.45.1(@cloudflare/workers-types@4.20260128.0)(@libsql/client@0.15.15)
       typescript: 5.9.3
 
   has-flag@4.0.0: {}
@@ -5032,6 +5072,12 @@ snapshots:
       '@libsql/linux-x64-gnu': 0.5.22
       '@libsql/linux-x64-musl': 0.5.22
       '@libsql/win32-x64-msvc': 0.5.22
+
+  light-my-request@6.6.0:
+    dependencies:
+      cookie: 1.1.1
+      process-warning: 4.0.1
+      set-cookie-parser: 2.7.2
 
   lightningcss-android-arm64@1.30.2:
     optional: true
@@ -5260,6 +5306,8 @@ snapshots:
   prettier@2.8.8: {}
 
   prettier@3.8.0: {}
+
+  process-warning@4.0.1: {}
 
   promise-limit@2.7.0: {}
 
@@ -5676,7 +5724,7 @@ snapshots:
       mrmime: 2.0.1
       regexparam: 3.0.0
 
-  wrangler@4.60.0:
+  wrangler@4.60.0(@cloudflare/workers-types@4.20260128.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
       '@cloudflare/unenv-preset': 2.11.0(unenv@2.0.0-rc.24)(workerd@1.20260120.0)
@@ -5687,6 +5735,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20260120.0
     optionalDependencies:
+      '@cloudflare/workers-types': 4.20260128.0
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil

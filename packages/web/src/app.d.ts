@@ -6,7 +6,9 @@ declare global {
 	namespace App {
 		interface Platform {
 			env: Env & {
-				DO_BACKEND: DOBackend
+				// Service binding - typed as Service for RPC support
+				// Note: In dev, Miniflare requires URL string as first arg to fetch()
+				DO_BACKEND: Service<DOBackend>
 			}
 			ctx: ExecutionContext
 			caches: CacheStorage
