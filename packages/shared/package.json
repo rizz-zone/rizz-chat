@@ -9,6 +9,8 @@
         "typescript": "^5.7.3"
     },
     "dependencies": {
+        "@better-auth/passkey": "^1.4.18",
+        "better-auth": "catalog:better-auth",
         "drizzle-orm": "catalog:drizzle",
         "ground0": "catalog:ground0",
         "uuidv7": "^1.1.0",
@@ -29,6 +31,7 @@
     },
     "exports": {
         ".": "./dist/index.js",
+        "./authServer": "./dist/authServer.js",
         "./schema": "./dist/schema.js",
         "./package.json": "./package.json"
     }
