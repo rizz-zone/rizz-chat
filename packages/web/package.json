@@ -24,6 +24,7 @@
     "@rizz-zone/chat-worker": "workspace:*",
     "drizzle-orm": "catalog:drizzle",
     "ground0": "catalog:ground0",
+    "vite-plugin-sveltekit-cf-websockets": "^0.2.0",
     "wa-sqlite": "https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz",
     "zod": "catalog:zod"
   },
@@ -45,7 +46,6 @@
     "typescript": "^5.9.3",
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
-    "vite-plugin-sveltekit-websockets": "workspace:*",
     "wrangler": "catalog:wrangler"
   }
 }
