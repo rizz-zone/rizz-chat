@@ -1,8 +1,8 @@
 import { defineConfig } from 'drizzle-kit'
 
+// Auth database schema config
 export default defineConfig({
-	dialect: 'sqlite',
-	driver: 'durable-sqlite',
+	dialect: 'turso',
 	schema: './src/db/schema.ts',
 	out: './src/db/generated'
 })
