@@ -10,7 +10,8 @@
     "check-types": "turbo run check-types",
     "format": "turbo run format",
     "style": "prettier --check .",
-    "style:write": "prettier --write ."
+    "style:write": "prettier --write .",
+    "db": "turso dev --db-file local.sqlite3"
   },
   "keywords": [],
   "author": "",
