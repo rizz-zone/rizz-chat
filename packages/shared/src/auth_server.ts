@@ -36,3 +36,4 @@ export const genAuthServer = (
 		plugins: [lastLoginMethod({ storeInDatabase: true }), passkey()],
 		secret
 	})
+export * as schema from '@/sync_db/schema'
