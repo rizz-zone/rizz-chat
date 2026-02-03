@@ -15,7 +15,7 @@
     "types": "wrangler types"
   },
   "dependencies": {
-    "@better-auth/passkey": "^1.4.18",
+    "@better-auth/passkey": "catalog:better-auth",
     "@ground0/adapter-svelte": "catalog:ground0",
     "@rizz-zone/chat-shared": "workspace:*",
     "@rizz-zone/chat-worker": "workspace:*",
