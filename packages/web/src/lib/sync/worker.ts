@@ -3,6 +3,7 @@ import type { MemoryModel } from './MemoryModel'
 import {
 	engineDef,
 	TransitionAction,
+	UpdateAction,
 	type AppTransition,
 	type AppUpdate
 } from '@rizz-zone/chat-shared'
@@ -19,6 +20,7 @@ workerEntrypoint<MemoryModel, AppTransition, AppUpdate>({
 	wsUrl,
 	dbName: 'chat',
 	initialMemoryModel: {
+		threadsFromEarliest: [],
 		successfulySentMessages: 0
 	},
 	localTransitionHandlers: {
@@ -31,7 +33,11 @@ workerEntrypoint<MemoryModel, AppTransition, AppUpdate>({
 			}
 		}
 	},
-	updateHandlers: {}
+	updateHandlers: {
+		[UpdateAction.InitLatestThreads]: ({ memoryModel }) => {
+			memoryModel.threadsFromEarliest.push('arusnyt')
+		}
+	}
 })
 
 declare const __WS_URL__: string

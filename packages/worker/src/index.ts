@@ -1,6 +1,7 @@
 import {
 	engineDef,
 	TransitionAction,
+	UpdateAction,
 	type AppTransition,
 	type AppUpdate
 } from '@rizz-zone/chat-shared'
@@ -12,8 +13,10 @@ import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
 import {
 	SyncEngineBackend,
+	type BackendAutoruns,
 	type BackendTransitionHandlers
 } from 'ground0/durable_object'
+import { UpdateImpact } from 'ground0'
 
 // Local Env type to avoid conflicts when imported from other packages
 type WorkerEnv = Cloudflare.Env
@@ -21,6 +24,16 @@ type WorkerEnv = Cloudflare.Env
 export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
 	protected override engineDef = engineDef
 	protected override appTransitionSchema = appTransitionSchema
+	protected override autoruns: BackendAutoruns = {
+		onConnect: (id) =>
+			this.update(
+				{
+					action: UpdateAction.InitLatestThreads,
+					impact: UpdateImpact.Unreliable
+				},
+				{ target: id }
+			)
+	}
 
 	protected override backendHandlers = {
 		[TransitionAction.SendMessage]: {
