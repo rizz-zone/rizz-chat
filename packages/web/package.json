@@ -22,6 +22,7 @@
     "better-auth": "catalog:better-auth",
     "drizzle-orm": "catalog:drizzle",
     "ground0": "catalog:ground0",
+    "http-status-codes": "^2.3.0",
     "vite-plugin-sveltekit-cf-websockets": "^0.2.0",
     "wa-sqlite": "https://github.com/rhashimoto/wa-sqlite/archive/refs/tags/v1.0.9.tar.gz",
     "zod": "catalog:zod"

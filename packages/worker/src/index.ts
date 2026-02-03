@@ -1,48 +1,14 @@
-import {
-	engineDef,
-	TransitionAction,
-	UpdateAction,
-	type AppTransition,
-	type AppUpdate
-} from '@rizz-zone/chat-shared'
 import { schema } from '@rizz-zone/chat-shared/auth_server'
 import { genAuthServer } from '@rizz-zone/chat-shared/auth_server'
-import { appTransitionSchema } from '@rizz-zone/chat-shared/schema'
 import { WorkerEntrypoint } from 'cloudflare:workers'
 import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
-import {
-	SyncEngineBackend,
-	type BackendAutoruns,
-	type BackendTransitionHandlers
-} from 'ground0/durable_object'
-import { UpdateImpact } from 'ground0'
+import type { InferSelectModel } from 'drizzle-orm'
 
 // Local Env type to avoid conflicts when imported from other packages
 type WorkerEnv = Cloudflare.Env
 
-export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
-	protected override engineDef = engineDef
-	protected override appTransitionSchema = appTransitionSchema
-	protected override autoruns: BackendAutoruns = {
-		onConnect: (id) =>
-			this.update(
-				{
-					action: UpdateAction.InitLatestThreads,
-					impact: UpdateImpact.Unreliable
-				},
-				{ target: id }
-			)
-	}
-
-	protected override backendHandlers = {
-		[TransitionAction.SendMessage]: {
-			confirm: () => {
-				return true
-			}
-		}
-	} satisfies BackendTransitionHandlers<AppTransition>
-}
+export { UserSpace } from './durable_object'
 
 export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 	private readonly auth
@@ -81,5 +47,13 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 		const stub = this.env.USERSPACE.get(id)
 
 		return stub.fetch(request)
+	}
+
+	public supplyChatPrefills(spaceId: string): Promise<{
+		threads: InferSelectModel<typeof schema.thread>[]
+	}> {
+		const id = this.env.USERSPACE.idFromName(spaceId)
+		const stub = this.env.USERSPACE.get(id)
+		return stub.supplyChatPrefills()
 	}
 }
