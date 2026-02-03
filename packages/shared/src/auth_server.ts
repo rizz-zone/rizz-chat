@@ -18,7 +18,7 @@ export const genAuthServer = (
 	}
 ) =>
 	betterAuth({
-		baseUrl,
+		baseURL: baseUrl,
 		database: drizzleAdapter(db, {
 			provider: 'sqlite',
 			schema
