@@ -12,16 +12,14 @@
     "prepare": "pnpm run types && svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "types": "wrangler types",
-    "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "types": "wrangler types"
   },
   "dependencies": {
+    "@better-auth/passkey": "catalog:better-auth",
     "@ground0/adapter-svelte": "catalog:ground0",
     "@rizz-zone/chat-shared": "workspace:*",
     "@rizz-zone/chat-worker": "workspace:*",
+    "better-auth": "catalog:better-auth",
     "drizzle-orm": "catalog:drizzle",
     "ground0": "catalog:ground0",
     "vite-plugin-sveltekit-cf-websockets": "^0.2.0",

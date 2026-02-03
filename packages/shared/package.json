@@ -9,26 +9,36 @@
         "typescript": "^5.7.3"
     },
     "dependencies": {
+        "@better-auth/passkey": "catalog:better-auth",
+        "@simplewebauthn/server": "^13.2.2",
+        "better-auth": "catalog:better-auth",
+        "better-call": "^1.1.8",
         "drizzle-orm": "catalog:drizzle",
         "ground0": "catalog:ground0",
         "uuidv7": "^1.1.0",
         "zod": "catalog:zod"
     },
     "devDependencies": {
+        "bun-types": "^1.3.8",
         "drizzle-kit": "catalog:drizzle",
         "tsdown": "^0.20.1",
         "vite-plugin-sql-raw": "^1.0.2"
     },
     "scripts": {
-        "db:generate": "drizzle-kit generate",
-        "db:migrate": "drizzle-kit migrate",
-        "db:push": "drizzle-kit push",
-        "db:studio": "drizzle-kit studio",
+        "db:auth:generate": "drizzle-kit generate",
+        "db:auth:migrate": "drizzle-kit migrate",
+        "db:auth:push": "drizzle-kit push",
+        "db:auth:studio": "drizzle-kit studio",
+        "db:sync:generate": "drizzle-kit generate --config=drizzle.sync.config.ts",
+        "db:sync:migrate": "drizzle-kit migrate --config=drizzle.sync.config.ts",
+        "db:sync:push": "drizzle-kit push --config=drizzle.sync.config.ts",
+        "db:sync:studio": "drizzle-kit studio --config=drizzle.sync.config.ts",
         "build": "tsdown",
         "dev": "tsdown --watch --no-clean"
     },
     "exports": {
         ".": "./dist/index.js",
+        "./auth_server": "./dist/auth_server.js",
         "./schema": "./dist/schema.js",
         "./package.json": "./package.json"
     }

@@ -10,7 +10,8 @@ export default defineConfig({
 	sourcemap: true,
 	entry: {
 		index: 'src/index.ts',
-		schema: 'src/schema.ts'
+		schema: 'src/schema.ts',
+		auth_server: 'src/auth_server.ts'
 	},
 	plugins: [sqlRawPlugin()]
 })
