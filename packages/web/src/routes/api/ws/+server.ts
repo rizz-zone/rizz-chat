@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit'
-import type { RequestHandler } from '../../chat/$types'
+import type { RequestHandler } from './$types'
 
 export const GET: RequestHandler = async ({ platform, request }) => {
 	if (!platform) error(500, 'No platform!')
@@ -9,8 +9,8 @@ export const GET: RequestHandler = async ({ platform, request }) => {
 	if (!upgradeHeader || upgradeHeader.toLowerCase() !== 'websocket') {
 		error(400, 'This endpoint only supports websocket upgrade requests.')
 	}
-	// Miniflare bug: service binding fetch doesn't accept Request objects directly,
-	// must pass URL string as first argument
+	// Miniflare moment: service binding fetch doesn't accept Request objects
+	// directly, must pass URL string as first argument
 	const doResponse = await platform.env.DO_BACKEND.fetch(request.url, request)
 
 	// For WebSocket upgrades (101), return original response with webSocket property
