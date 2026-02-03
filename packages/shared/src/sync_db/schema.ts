@@ -3,9 +3,13 @@ import { uuidv7 } from 'uuidv7'
 
 export const thread = sqliteTable('thread', {
 	id: text().primaryKey().$defaultFn(uuidv7),
-	createdAt: integer({ mode: 'timestamp_ms' }),
-	lastMutatedAt: integer({ mode: 'timestamp_ms' }),
-	name: text()
+	createdAt: integer({ mode: 'timestamp_ms' })
+		.notNull()
+		.$default(() => new Date()),
+	lastMutatedAt: integer({ mode: 'timestamp_ms' })
+		.notNull()
+		.$default(() => new Date()),
+	name: text().notNull().default('')
 })
 export const message = sqliteTable('message', {
 	id: text().primaryKey().$defaultFn(uuidv7),
