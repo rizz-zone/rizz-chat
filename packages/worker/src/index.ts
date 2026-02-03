@@ -1,4 +1,3 @@
-/// <reference path="../worker-configuration.d.ts" />
 import {
 	engineDef,
 	TransitionAction,
