@@ -2,8 +2,10 @@ import { passkey } from '@better-auth/passkey'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter, type DB } from 'better-auth/adapters/drizzle'
 import { lastLoginMethod } from 'better-auth/plugins'
+import * as schema from './db/schema'
 
 export const genAuthServer = (
+	baseUrl: string,
 	db: DB,
 	secret: string,
 	apiKeys: {
@@ -16,8 +18,10 @@ export const genAuthServer = (
 	}
 ) =>
 	betterAuth({
+		baseUrl,
 		database: drizzleAdapter(db, {
-			provider: 'sqlite'
+			provider: 'sqlite',
+			schema
 		}),
 		socialProviders: {
 			twitter: {

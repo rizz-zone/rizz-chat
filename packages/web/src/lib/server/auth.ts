@@ -2,7 +2,7 @@ import { env } from '$env/dynamic/private'
 import { genAuthServer } from '@rizz-zone/chat-shared/auth_server'
 import { db } from './db'
 
-export const auth = genAuthServer(db, env.BETTER_AUTH_SECRET, {
+export const auth = genAuthServer(env.BASE_URL, db, env.BETTER_AUTH_SECRET, {
 	X_API_KEY: env.X_API_KEY,
 	X_API_SECRET: env.X_API_SECRET,
 	DISCORD_CLIENT_ID: env.DISCORD_CLIENT_ID,
