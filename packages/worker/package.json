@@ -24,6 +24,7 @@
         "@libsql/client": "^0.15.15",
         "@rizz-zone/chat-shared": "workspace:*",
         "better-auth": "catalog:better-auth",
+        "ms": "catalog:ms",
         "drizzle-orm": "catalog:drizzle",
         "ground0": "catalog:ground0"
     }

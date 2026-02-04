@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types'
-import { supplyChatPrefills } from '$lib/ssr/supply_chat_prefills'
+import { supplyChatPrefills } from '$lib/server/ssr/supply_chat_prefills'
 import { error } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 

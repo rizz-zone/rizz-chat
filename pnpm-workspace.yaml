@@ -14,7 +14,9 @@ catalogs:
   wrangler:
     wrangler: ^4.60.0
   zod:
-    zod: ^3.25.76
+    zod: ^4.3.6
+  ms:
+    ms: 4.0.0-nightly.202508271359
 
 onlyBuiltDependencies:
   - esbuild

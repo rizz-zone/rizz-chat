@@ -56,4 +56,27 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 		const stub = this.env.USERSPACE.get(id)
 		return stub.supplyChatPrefills()
 	}
+
+	/**
+	 * Initialise a new disposable session. Marks the DO as disposable and
+	 * schedules a 28-day self-deletion alarm.
+	 */
+	public async initDisposableSession(sessionId: string): Promise<void> {
+		const id = this.env.USERSPACE.idFromName(sessionId)
+		const stub = this.env.USERSPACE.get(id)
+		await stub.markDisposable()
+	}
+
+	/**
+	 * Refresh a disposable session — pushes the self-deletion alarm back by
+	 * 28 days and returns the current chat prefills.
+	 */
+	public async refreshDisposableSession(sessionId: string): Promise<{
+		threads: InferSelectModel<typeof schema.thread>[]
+	}> {
+		const id = this.env.USERSPACE.idFromName(sessionId)
+		const stub = this.env.USERSPACE.get(id)
+		await stub.refreshDisposableAlarm()
+		return stub.supplyChatPrefills()
+	}
 }
