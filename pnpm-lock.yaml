@@ -247,6 +247,9 @@ importers:
         specifier: ^5.7.3
         version: 5.9.3
     devDependencies:
+      '@types/node':
+        specifier: ^22.19.7
+        version: 22.19.7
       wrangler:
         specifier: catalog:wrangler
         version: 4.60.0(@cloudflare/workers-types@4.20260128.0)
