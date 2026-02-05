@@ -20,7 +20,11 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 			drizzle(
 				createClient({
 					url: env.DATABASE_URL,
-					authToken: env.DATABASE_AUTH_TOKEN
+					authToken:
+						'DATABASE_AUTH_TOKEN' in env &&
+						typeof env.DATABASE_AUTH_TOKEN === 'string'
+							? env.DATABASE_AUTH_TOKEN
+							: undefined
 				}),
 				{ schema }
 			),
