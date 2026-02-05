@@ -1,35 +1,14 @@
-import {
-	engineDef,
-	TransitionAction,
-	type AppTransition,
-	type AppUpdate
-} from '@rizz-zone/chat-shared'
 import { schema } from '@rizz-zone/chat-shared/auth_server'
 import { genAuthServer } from '@rizz-zone/chat-shared/auth_server'
-import { appTransitionSchema } from '@rizz-zone/chat-shared/schema'
 import { WorkerEntrypoint } from 'cloudflare:workers'
 import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
-import {
-	SyncEngineBackend,
-	type BackendTransitionHandlers
-} from 'ground0/durable_object'
+import type { InferSelectModel } from 'drizzle-orm'
 
 // Local Env type to avoid conflicts when imported from other packages
 type WorkerEnv = Cloudflare.Env
 
-export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
-	protected override engineDef = engineDef
-	protected override appTransitionSchema = appTransitionSchema
-
-	protected override backendHandlers = {
-		[TransitionAction.SendMessage]: {
-			confirm: () => {
-				return true
-			}
-		}
-	} satisfies BackendTransitionHandlers<AppTransition>
-}
+export { UserSpace } from './durable_object'
 
 export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 	private readonly auth
@@ -41,7 +20,11 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 			drizzle(
 				createClient({
 					url: env.DATABASE_URL,
-					authToken: env.DATABASE_AUTH_TOKEN
+					authToken:
+						'DATABASE_AUTH_TOKEN' in env &&
+						typeof env.DATABASE_AUTH_TOKEN === 'string'
+							? env.DATABASE_AUTH_TOKEN
+							: undefined
 				}),
 				{ schema }
 			),
@@ -68,5 +51,36 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 		const stub = this.env.USERSPACE.get(id)
 
 		return stub.fetch(request)
+	}
+
+	public supplyChatPrefills(spaceId: string): Promise<{
+		threads: InferSelectModel<typeof schema.thread>[]
+	}> {
+		const id = this.env.USERSPACE.idFromName(spaceId)
+		const stub = this.env.USERSPACE.get(id)
+		return stub.supplyChatPrefills()
+	}
+
+	/**
+	 * Initialise a new disposable session. Marks the DO as disposable and
+	 * schedules a 28-day self-deletion alarm.
+	 */
+	public async initDisposableSession(sessionId: string): Promise<void> {
+		const id = this.env.USERSPACE.idFromName(sessionId)
+		const stub = this.env.USERSPACE.get(id)
+		await stub.markDisposable()
+	}
+
+	/**
+	 * Refresh a disposable session — pushes the self-deletion alarm back by
+	 * 28 days and returns the current chat prefills.
+	 */
+	public async refreshDisposableSession(sessionId: string): Promise<{
+		threads: InferSelectModel<typeof schema.thread>[]
+	}> {
+		const id = this.env.USERSPACE.idFromName(sessionId)
+		const stub = this.env.USERSPACE.get(id)
+		await stub.refreshDisposableAlarm()
+		return stub.supplyChatPrefills()
 	}
 }
