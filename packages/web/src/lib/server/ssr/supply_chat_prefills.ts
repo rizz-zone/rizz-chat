@@ -1,18 +1,23 @@
 import type { Cookies } from '@sveltejs/kit'
-import { jwtVerify, SignJWT, errors } from 'jose'
+import { errors } from 'jose'
 import { uuidv7 } from 'uuidv7'
 import { ms } from 'ms'
 import { dev } from '$app/environment'
 import type { InferSelectModel } from 'drizzle-orm'
 import type { schema } from '@rizz-zone/chat-shared/auth_server'
-import { isDisposableSessionJwtPayload } from '../types/security/DisposableSessionJwtPayload'
-import { SchemaNotSatisfiedError } from '../errors'
+import {
+	DISPOSABLE_COOKIE_NAME,
+	DISPOSABLE_MAX_AGE,
+	DISPOSABLE_REFRESH_AGE,
+	verifyDisposableSessionJwt,
+	signDisposableSessionJwt
+} from '@rizz-zone/chat-shared/disposable_session'
 
 export async function supplyChatPrefills({
 	platform,
 	locals,
 	cookies,
-	disposableSessionSecret: rawDisposableSessionSecret
+	disposableSessionSecret
 }: {
 	platform: Readonly<App.Platform>
 	locals: Readonly<App.Locals>
@@ -30,29 +35,28 @@ export async function supplyChatPrefills({
 		}
 	}
 
-	const secret = new TextEncoder().encode(rawDisposableSessionSecret)
-	const disposableSessionJwt = cookies.get('disposable_session')
+	const disposableSessionJwt = cookies.get(DISPOSABLE_COOKIE_NAME)
 
 	// No existing session — create a fresh disposable session
 	if (!disposableSessionJwt) {
-		return await createDisposableSession({ platform, cookies, secret })
+		return await createDisposableSession({ platform, cookies, disposableSessionSecret })
 	}
 
 	// Existing session — verify the JWT
 	try {
-		const { payload } = await jwtVerify(disposableSessionJwt, secret)
-		if (!isDisposableSessionJwtPayload(payload))
-			throw new SchemaNotSatisfiedError()
-		const { sessionId, iat } = payload
+		const { sessionId, iat } = await verifyDisposableSessionJwt(
+			disposableSessionJwt,
+			disposableSessionSecret
+		)
 
 		// Refresh the JWT if it was issued more than 14 days ago.
 		// This extends the cookie + DO alarm by another 28 days.
 		const ageMs = Date.now() - iat * 1000
-		if (ageMs > ms('14d')) {
+		if (ageMs > ms(DISPOSABLE_REFRESH_AGE)) {
 			return await refreshDisposableSession({
 				platform,
 				cookies,
-				secret,
+				disposableSessionSecret,
 				sessionId
 			})
 		}
@@ -68,9 +72,9 @@ export async function supplyChatPrefills({
 			err instanceof errors.JWTExpired ||
 			err instanceof errors.JWSInvalid ||
 			err instanceof errors.JWTClaimValidationFailed ||
-			err instanceof SchemaNotSatisfiedError
+			err instanceof Error
 		) {
-			return await createDisposableSession({ platform, cookies, secret })
+			return await createDisposableSession({ platform, cookies, disposableSessionSecret })
 		}
 		throw err
 	}
@@ -79,22 +83,18 @@ export async function supplyChatPrefills({
 /** Helper to sign a disposable session JWT and set it as a cookie. */
 async function signAndSetDisposableSessionJWT({
 	cookies,
-	secret,
+	disposableSessionSecret,
 	sessionId
 }: {
 	cookies: Cookies
-	secret: Uint8Array
+	disposableSessionSecret: string
 	sessionId: string
 }) {
-	const jwt = await new SignJWT({ sessionId })
-		.setProtectedHeader({ alg: 'HS256' })
-		.setIssuedAt()
-		.setExpirationTime('28d')
-		.sign(secret)
+	const jwt = await signDisposableSessionJwt(sessionId, disposableSessionSecret)
 
-	cookies.set('disposable_session', jwt, {
+	cookies.set(DISPOSABLE_COOKIE_NAME, jwt, {
 		path: '/',
-		expires: new Date(Date.now() + ms('28d')),
+		expires: new Date(Date.now() + ms(DISPOSABLE_MAX_AGE)),
 		secure: !dev,
 		sameSite: 'lax',
 		httpOnly: true
@@ -105,14 +105,14 @@ async function signAndSetDisposableSessionJWT({
 async function createDisposableSession({
 	platform,
 	cookies,
-	secret
+	disposableSessionSecret
 }: {
 	platform: Readonly<App.Platform>
 	cookies: Cookies
-	secret: Uint8Array
+	disposableSessionSecret: string
 }) {
 	const sessionId = uuidv7()
-	await signAndSetDisposableSessionJWT({ cookies, secret, sessionId })
+	await signAndSetDisposableSessionJWT({ cookies, disposableSessionSecret, sessionId })
 
 	// Tell the DO it's disposable so it can schedule self-deletion
 	await platform.env.DO_BACKEND.initDisposableSession(sessionId)
@@ -127,15 +127,15 @@ async function createDisposableSession({
 async function refreshDisposableSession({
 	platform,
 	cookies,
-	secret,
+	disposableSessionSecret,
 	sessionId
 }: {
 	platform: Readonly<App.Platform>
 	cookies: Cookies
-	secret: Uint8Array
+	disposableSessionSecret: string
 	sessionId: string
 }) {
-	await signAndSetDisposableSessionJWT({ cookies, secret, sessionId })
+	await signAndSetDisposableSessionJWT({ cookies, disposableSessionSecret, sessionId })
 
 	// Push the DO's self-deletion alarm back by 28 days
 	const prefills =

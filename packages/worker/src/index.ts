@@ -1,9 +1,15 @@
 import { schema } from '@rizz-zone/chat-shared/auth_server'
 import { genAuthServer } from '@rizz-zone/chat-shared/auth_server'
+import {
+	extractDisposableSessionId,
+	signDisposableSessionJwt,
+	buildDisposableSessionCookieHeader
+} from '@rizz-zone/chat-shared/disposable_session'
 import { WorkerEntrypoint } from 'cloudflare:workers'
 import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
 import type { InferSelectModel } from 'drizzle-orm'
+import { uuidv7 } from 'uuidv7'
 
 // Local Env type to avoid conflicts when imported from other packages
 type WorkerEnv = Cloudflare.Env
@@ -41,16 +47,52 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 	}
 
 	public override async fetch(request: Request) {
+		const ns = this.env.USERSPACE
+
 		const session = await this.auth.api.getSession({
 			headers: request.headers
 		})
-		if (session) console.debug(session.user.email)
-		else console.debug('No session')
 
-		const id = this.env.USERSPACE.idFromName('temp')
-		const stub = this.env.USERSPACE.get(id)
+		// Authenticated user — route to their DO
+		if (session) {
+			const id = ns.idFromName(session.user.id)
+			const stub = ns.get(id)
+			return stub.fetch(request)
+		}
 
-		return stub.fetch(request)
+		// Try existing disposable session cookie
+		const result = await extractDisposableSessionId(
+			request.headers.get('cookie'),
+			this.env.DISPOSABLE_SESSION_SECRET
+		)
+
+		if (result) {
+			const id = ns.idFromName(result.sessionId)
+			const stub = ns.get(id)
+			return stub.fetch(request)
+		}
+
+		// No auth at all — create a new disposable session inline
+		const sessionId = uuidv7()
+		const id = ns.idFromName(sessionId)
+		const stub = ns.get(id)
+		await stub.markDisposable()
+
+		const jwt = await signDisposableSessionJwt(
+			sessionId,
+			this.env.DISPOSABLE_SESSION_SECRET
+		)
+
+		const response = await stub.fetch(request)
+
+		// Clone the response so we can append the Set-Cookie header
+		const mutableResponse = new Response(response.body, response)
+		const isSecure = new URL(request.url).protocol === 'https:'
+		mutableResponse.headers.append(
+			'Set-Cookie',
+			buildDisposableSessionCookieHeader(jwt, isSecure)
+		)
+		return mutableResponse
 	}
 
 	public supplyChatPrefills(spaceId: string): Promise<{

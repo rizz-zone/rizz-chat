@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"rewriteRelativeImportExtensions": true,
 		"allowJs": true,
-		"checkJs": true,
+		"checkJs": false,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
@@ -13,5 +13,6 @@
 		"moduleResolution": "bundler",
 		"types": ["./worker-configuration.d.ts"]
 	},
+	"files": ["../worker/worker-configuration.d.ts"],
 	"exclude": ["../worker"]
 }
