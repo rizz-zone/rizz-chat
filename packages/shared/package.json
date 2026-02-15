@@ -13,12 +13,16 @@
         "@simplewebauthn/server": "^13.2.2",
         "better-auth": "catalog:better-auth",
         "better-call": "^1.1.8",
+        "cookie": "^1.1.1",
         "drizzle-orm": "catalog:drizzle",
         "ground0": "catalog:ground0",
+        "jose": "^6.1.3",
+        "ms": "catalog:ms",
         "uuidv7": "^1.1.0",
         "zod": "catalog:zod"
     },
     "devDependencies": {
+        "@types/cookie": "^1.0.0",
         "bun-types": "^1.3.8",
         "drizzle-kit": "catalog:drizzle",
         "tsdown": "^0.20.1",
@@ -39,6 +43,7 @@
     "exports": {
         ".": "./dist/index.js",
         "./auth_server": "./dist/auth_server.js",
+        "./disposable_session": "./dist/disposable_session.js",
         "./schema": "./dist/schema.js",
         "./package.json": "./package.json"
     }
