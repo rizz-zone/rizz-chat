@@ -14,7 +14,9 @@
     "scripts": {
         "types": "wrangler types",
         "dev": "wrangler dev",
-        "build": "wrangler build"
+        "build": "wrangler build",
+        "check-types": "pnpm exec tsc -p tsconfig.json --noEmit",
+        "lint": "pnpm exec eslint ."
     },
     "exports": {
         ".": "./src/type_export.ts",

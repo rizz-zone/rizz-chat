@@ -6,13 +6,15 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "packageManager": "pnpm@10.28.1",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
-    "prepare": "svelte-kit sync || echo ''",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "types": "wrangler types"
+  "dev": "vite dev",
+  "build": "vite build",
+  "preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
+  "prepare": "svelte-kit sync || echo ''",
+  "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+  "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+  "types": "wrangler types",
+  "check-types": "pnpm check",
+  "lint": "pnpm exec eslint ."
   },
   "dependencies": {
     "@better-auth/passkey": "catalog:better-auth",

@@ -39,7 +39,11 @@ export async function supplyChatPrefills({
 
 	// No existing session — create a fresh disposable session
 	if (!disposableSessionJwt) {
-		return await createDisposableSession({ platform, cookies, disposableSessionSecret })
+		return await createDisposableSession({
+			platform,
+			cookies,
+			disposableSessionSecret
+		})
 	}
 
 	// Existing session — verify the JWT
@@ -74,7 +78,11 @@ export async function supplyChatPrefills({
 			err instanceof errors.JWTClaimValidationFailed ||
 			err instanceof Error
 		) {
-			return await createDisposableSession({ platform, cookies, disposableSessionSecret })
+			return await createDisposableSession({
+				platform,
+				cookies,
+				disposableSessionSecret
+			})
 		}
 		throw err
 	}
@@ -112,7 +120,11 @@ async function createDisposableSession({
 	disposableSessionSecret: string
 }) {
 	const sessionId = uuidv7()
-	await signAndSetDisposableSessionJWT({ cookies, disposableSessionSecret, sessionId })
+	await signAndSetDisposableSessionJWT({
+		cookies,
+		disposableSessionSecret,
+		sessionId
+	})
 
 	// Tell the DO it's disposable so it can schedule self-deletion
 	await platform.env.DO_BACKEND.initDisposableSession(sessionId)
@@ -135,7 +147,11 @@ async function refreshDisposableSession({
 	disposableSessionSecret: string
 	sessionId: string
 }) {
-	await signAndSetDisposableSessionJWT({ cookies, disposableSessionSecret, sessionId })
+	await signAndSetDisposableSessionJWT({
+		cookies,
+		disposableSessionSecret,
+		sessionId
+	})
 
 	// Push the DO's self-deletion alarm back by 28 days
 	const prefills =

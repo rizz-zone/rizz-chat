@@ -31,7 +31,8 @@
 >
 <ul>
 	{#if $threadsFromEarliest}
-		{#each $threadsFromEarliest as thread}
+		<!-- Keying by name is Bad, but this is a very short-term solution just to not have it scream. -->
+		{#each $threadsFromEarliest as thread (thread)}
 			<li>{thread}</li>
 		{/each}
 	{/if}
