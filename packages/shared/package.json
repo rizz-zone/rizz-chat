@@ -22,7 +22,7 @@
         "zod": "catalog:zod"
     },
     "devDependencies": {
-        "bun-types": "^1.3.8",
+        "bun-types": "catalog:bun-types",
         "drizzle-kit": "catalog:drizzle",
         "tsdown": "^0.20.1",
         "vite-plugin-sql-raw": "^1.0.2"
