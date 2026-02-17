@@ -1,6 +1,9 @@
 {
 	"$schema": "https://turborepo.com/schema.json",
 	"tasks": {
+		"ensure-env": {
+			"cache": false
+		},
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", "build/**"],
