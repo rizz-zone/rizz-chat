@@ -31,6 +31,11 @@ workerEntrypoint<MemoryModel, AppTransition, AppUpdate>({
 			revertMemoryModel: ({ memoryModel }) => {
 				memoryModel.successfulySentMessages -= 1
 			}
+		},
+		[TransitionAction.SeedPrefetchedThreads]: {
+			editMemoryModel: ({ memoryModel, data }) => {
+				memoryModel.threadsFromEarliest = data.threadNames
+			}
 		}
 	},
 	updateHandlers: {
