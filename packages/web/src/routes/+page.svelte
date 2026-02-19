@@ -11,7 +11,11 @@
 			engine.transition({
 				action: TransitionAction.SeedPrefetchedThreads,
 				impact: TransitionImpact.LocalOnly,
-				data: { threadNames: [...data.chatPrefills.threads].reverse().map((t) => t.name) }
+				data: {
+					threadNames: [...data.chatPrefills.threads]
+						.reverse()
+						.map((t) => t.name)
+				}
 			})
 		}
 	})
