@@ -16,8 +16,8 @@ export const DISPOSABLE_REFRESH_AGE = '14d'
 /**
  * Create a signed disposable-session JWT for the given session ID.
  *
- * @param sessionId - The disposable session identifier.
- * @param secret - HMAC secret used to sign the token.
+ * @param sessionId The disposable session identifier.
+ * @param secret HMAC secret used to sign the token.
  * @returns A signed JWT string.
  */
 export async function signDisposableSessionJwt(
@@ -34,8 +34,8 @@ export async function signDisposableSessionJwt(
 /**
  * Verify a disposable-session JWT and extract its payload.
  *
- * @param jwt - The JWT string to verify.
- * @param secret - HMAC secret used to verify the signature.
+ * @param jwt The JWT string to verify.
+ * @param secret HMAC secret used to verify the signature.
  * @returns The validated payload with `sessionId` and `iat`.
  * @throws If the token is invalid or the payload shape is wrong.
  */
@@ -52,8 +52,8 @@ export async function verifyDisposableSessionJwt(
 /**
  * Extract and verify a disposable-session JWT from a raw `Cookie` header.
  *
- * @param rawCookieHeader - The raw `Cookie` header string, or `null` if absent.
- * @param secret - HMAC secret used to verify the token.
+ * @param rawCookieHeader The raw `Cookie` header string, or `null` if absent.
+ * @param secret HMAC secret used to verify the token.
  * @returns The validated payload, or `null` if missing or invalid.
  */
 export async function extractDisposableSessionId(
@@ -74,8 +74,8 @@ export async function extractDisposableSessionId(
 /**
  * Build a `Set-Cookie` header string for the disposable-session JWT.
  *
- * @param jwt - The disposable-session JWT.
- * @param secure - Whether to set the `Secure` flag on the cookie.
+ * @param jwt The disposable-session JWT.
+ * @param secure Whether to set the `Secure` flag on the cookie.
  * @returns A serialized `Set-Cookie` header value.
  */
 export function buildDisposableSessionCookieHeader(
