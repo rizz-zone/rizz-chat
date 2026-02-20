@@ -1,7 +1,7 @@
 import {
 	createTransitionSchema,
 	TransitionImpact,
-	UpdateImpact,
+	type UpdateImpact,
 	type Update
 } from 'ground0'
 import {
