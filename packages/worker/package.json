@@ -9,7 +9,7 @@
     },
     "devDependencies": {
         "@types/node": "^22.19.7",
-        "wrangler": "catalog:wrangler"
+        "wrangler": "catalog:build"
     },
     "scripts": {
         "types": "wrangler types",
