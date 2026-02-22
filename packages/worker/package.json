@@ -8,13 +8,15 @@
         "typescript": "^5.7.3"
     },
     "devDependencies": {
-        "wrangler": "catalog:wrangler"
+        "@types/node": "^22.19.7",
+        "wrangler": "catalog:build"
     },
     "scripts": {
-        "prepare": "pnpm run types",
         "types": "wrangler types",
         "dev": "wrangler dev",
-        "build": "wrangler build"
+        "build": "wrangler build",
+        "check-types": "pnpm exec tsc -p tsconfig.json --noEmit",
+        "lint": "pnpm exec eslint ."
     },
     "exports": {
         ".": "./src/type_export.ts",
@@ -25,6 +27,8 @@
         "@rizz-zone/chat-shared": "workspace:*",
         "better-auth": "catalog:better-auth",
         "drizzle-orm": "catalog:drizzle",
-        "ground0": "catalog:ground0"
+        "ground0": "catalog:ground0",
+        "ms": "catalog:ms",
+        "uuidv7": "^1.1.0"
     }
 }

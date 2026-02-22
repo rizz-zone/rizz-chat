@@ -1,16 +1,25 @@
-import { createTransitionSchema, TransitionImpact, type Update } from 'ground0'
 import {
+	createTransitionSchema,
+	TransitionImpact,
+	type UpdateImpact,
+	type Update
+} from 'ground0'
+import {
+	array,
 	discriminatedUnion,
 	literal,
 	object,
 	string,
 	type z
-} from 'zod/v4-mini'
+} from 'zod/mini'
 
 export enum TransitionAction {
-	SendMessage
+	SendMessage,
+	SeedPrefetchedThreads
 }
-export enum UpdateAction {}
+export enum UpdateAction {
+	InitLatestThreads
+}
 
 // AppTransition
 export const sourceSchema = discriminatedUnion('action', [
@@ -18,6 +27,11 @@ export const sourceSchema = discriminatedUnion('action', [
 		action: literal(TransitionAction.SendMessage),
 		impact: literal(TransitionImpact.OptimisticPush),
 		data: object({ message: string() })
+	}),
+	object({
+		action: literal(TransitionAction.SeedPrefetchedThreads),
+		impact: literal(TransitionImpact.LocalOnly),
+		data: object({ threadNames: array(string()) })
 	})
 ])
 export type AppTransition = z.infer<typeof sourceSchema>
@@ -28,4 +42,7 @@ export const appTransitionSchema: ReturnType<
 > = createTransitionSchema(sourceSchema)
 
 // AppUpdate (none exist yet)
-export type AppUpdate = Update & {}
+export type AppUpdate = Update & {
+	action: UpdateAction.InitLatestThreads
+	impact: UpdateImpact.Unreliable
+}

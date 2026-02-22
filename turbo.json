@@ -1,9 +1,12 @@
 {
 	"$schema": "https://turborepo.com/schema.json",
 	"tasks": {
+		"ensure-env": {
+			"cache": false
+		},
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**", "build/**"],
+			"outputs": ["dist/**", "build/**", ".svelte-kit/output/**"],
 			"inputs": [
 				"!vitest.config.ts",
 				"**/*.ts",
@@ -22,7 +25,7 @@
 			"cache": false
 		},
 		"check-types": {
-			"dependsOn": ["^build", "^check-types"],
+			"dependsOn": ["^@rizz-zone/chat-shared#build", "^check-types"],
 			"outputs": []
 		}
 	}

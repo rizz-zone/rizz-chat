@@ -8,6 +8,7 @@
 	let { data: _data }: PageProps = $props()
 
 	const successfullySentMessages = engine.path('successfulySentMessages')
+	const threadsFromEarliest = engine.path('threadsFromEarliest')
 </script>
 
 <p>So far, {$successfullySentMessages} messages have been sent successfully.</p>
@@ -28,3 +29,11 @@
 <button onclick={() => authClient.signIn.social({ provider: 'twitter' })}
 	>Sign in with X</button
 >
+<ul>
+	{#if $threadsFromEarliest}
+		<!-- Keying by name is Bad, but this is a very short-term solution just to not have it scream. -->
+		{#each $threadsFromEarliest as thread (thread)}
+			<li>{thread}</li>
+		{/each}
+	{/if}
+</ul>
