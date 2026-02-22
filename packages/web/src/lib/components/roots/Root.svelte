@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state'
 	import type { Prefills } from '$lib/types/Prefills'
-	import { PrimaryViewCategory } from '$lib/types/shallow_routing/PrimaryViewCategory'
-	import type { ViewID } from '$lib/types/shallow_routing/ViewID'
+	import type { Views } from '$lib/types/shallow_routing/Views'
 	import PrimaryRoot from './PrimaryRoot.svelte'
 
 	const {
@@ -10,9 +9,7 @@
 		initialViews
 	}: {
 		prefills: Prefills
-		initialViews: App.PageState['views'] & {
-			primary: ViewID<PrimaryViewCategory, never>
-		}
+		initialViews: Views
 	} = $props()
 
 	const view = $derived({
