@@ -46,6 +46,7 @@
         "./auth_server": "./dist/auth_server.js",
         "./disposable_session": "./dist/disposable_session.js",
         "./schema": "./dist/schema.js",
+        "./types": "./dist/types.js",
         "./package.json": "./package.json"
     }
 }

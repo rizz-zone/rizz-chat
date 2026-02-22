@@ -7,6 +7,7 @@ import {
 } from '@rizz-zone/chat-shared'
 import { schema } from '@rizz-zone/chat-shared/auth_server'
 import { appTransitionSchema } from '@rizz-zone/chat-shared/schema'
+import type { BackendChatPrefills } from '@rizz-zone/chat-shared/types'
 import { desc } from 'drizzle-orm'
 import { UpdateImpact } from 'ground0'
 import {
@@ -38,8 +39,8 @@ export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
 		}
 	} satisfies BackendTransitionHandlers<AppTransition>
 
-	public async supplyChatPrefills() {
-		// temp
+	public async supplyBackendChatPrefills(): Promise<BackendChatPrefills> {
+		// TODO: a whole lot more
 		const threads = await this.db
 			.select()
 			.from(schema.thread)

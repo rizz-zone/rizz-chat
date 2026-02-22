@@ -3,8 +3,6 @@ import { errors } from 'jose'
 import { uuidv7 } from 'uuidv7'
 import { ms } from 'ms'
 import { dev } from '$app/environment'
-import type { InferSelectModel } from 'drizzle-orm'
-import type { schema } from '@rizz-zone/chat-shared/auth_server'
 import {
 	DISPOSABLE_COOKIE_NAME,
 	DISPOSABLE_MAX_AGE,
@@ -12,6 +10,7 @@ import {
 	verifyDisposableSessionJwt,
 	signDisposableSessionJwt
 } from '@rizz-zone/chat-shared/disposable_session'
+import type { Prefills } from '$lib/types/Prefills'
 
 export async function supplyChatPrefills({
 	platform,
@@ -23,14 +22,13 @@ export async function supplyChatPrefills({
 	locals: Readonly<App.Locals>
 	cookies: Cookies
 	disposableSessionSecret: string
-}): Promise<{
-	threads: InferSelectModel<typeof schema.thread>[]
-	redirectToDefaultThread: boolean
-}> {
+}): Promise<Prefills> {
 	// Authenticated user — use their user ID as the DO space
 	if (locals.user) {
 		return {
-			...(await platform.env.DO_BACKEND.supplyChatPrefills(locals.user.id)),
+			...(await platform.env.DO_BACKEND.supplyBackendChatPrefills(
+				locals.user.id
+			)),
 			redirectToDefaultThread: false
 		}
 	}
@@ -39,11 +37,15 @@ export async function supplyChatPrefills({
 
 	// No existing session — create a fresh disposable session
 	if (!disposableSessionJwt) {
-		return await createDisposableSession({
+		await createDisposableSession({
 			platform,
 			cookies,
 			disposableSessionSecret
 		})
+		return {
+			threads: [],
+			redirectToDefaultThread: true
+		}
 	}
 
 	// Existing session — verify the JWT
@@ -57,7 +59,7 @@ export async function supplyChatPrefills({
 		// This extends the cookie + DO alarm by another 28 days.
 		const ageMs = Date.now() - iat * 1000
 		if (ageMs > ms(DISPOSABLE_REFRESH_AGE)) {
-			return await refreshDisposableSession({
+			await refreshDisposableSession({
 				platform,
 				cookies,
 				disposableSessionSecret,
@@ -67,7 +69,7 @@ export async function supplyChatPrefills({
 
 		// Valid and fresh — just fetch prefills from the DO
 		return {
-			...(await platform.env.DO_BACKEND.supplyChatPrefills(sessionId)),
+			...(await platform.env.DO_BACKEND.supplyBackendChatPrefills(sessionId)),
 			redirectToDefaultThread: false
 		}
 	} catch (err) {
@@ -78,11 +80,15 @@ export async function supplyChatPrefills({
 			err instanceof errors.JWTClaimValidationFailed ||
 			err instanceof Error
 		) {
-			return await createDisposableSession({
+			await createDisposableSession({
 				platform,
 				cookies,
 				disposableSessionSecret
 			})
+			return {
+				threads: [],
+				redirectToDefaultThread: true
+			}
 		}
 		throw err
 	}
@@ -128,11 +134,6 @@ async function createDisposableSession({
 
 	// Tell the DO it's disposable so it can schedule self-deletion
 	await platform.env.DO_BACKEND.initDisposableSession(sessionId)
-
-	return {
-		threads: [] as InferSelectModel<typeof schema.thread>[],
-		redirectToDefaultThread: true
-	}
 }
 
 /** Re-sign the JWT with a fresh iat/exp, and reset the DO's self-deletion alarm. */
@@ -154,11 +155,5 @@ async function refreshDisposableSession({
 	})
 
 	// Push the DO's self-deletion alarm back by 28 days
-	const prefills =
-		await platform.env.DO_BACKEND.refreshDisposableSession(sessionId)
-
-	return {
-		...prefills,
-		redirectToDefaultThread: false
-	}
+	await platform.env.DO_BACKEND.refreshDisposableSession(sessionId)
 }

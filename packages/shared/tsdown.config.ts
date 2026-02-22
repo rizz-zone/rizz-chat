@@ -12,7 +12,8 @@ export default defineConfig({
 		index: 'src/index.ts',
 		schema: 'src/schema.ts',
 		auth_server: 'src/auth_server.ts',
-		disposable_session: 'src/disposable_session.ts'
+		disposable_session: 'src/disposable_session.ts',
+		types: 'src/types.ts'
 	},
 	plugins: [sqlRawPlugin()]
 })

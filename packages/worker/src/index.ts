@@ -8,8 +8,8 @@ import {
 import { WorkerEntrypoint } from 'cloudflare:workers'
 import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
-import type { InferSelectModel } from 'drizzle-orm'
 import { uuidv7 } from 'uuidv7'
+import type { BackendChatPrefills } from '@rizz-zone/chat-shared/types'
 
 // Local Env type to avoid conflicts when imported from other packages
 type WorkerEnv = Cloudflare.Env
@@ -95,12 +95,12 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 		return mutableResponse
 	}
 
-	public supplyChatPrefills(spaceId: string): Promise<{
-		threads: InferSelectModel<typeof schema.thread>[]
-	}> {
+	public supplyBackendChatPrefills(
+		spaceId: string
+	): Promise<BackendChatPrefills> {
 		const id = this.env.USERSPACE.idFromName(spaceId)
 		const stub = this.env.USERSPACE.get(id)
-		return stub.supplyChatPrefills()
+		return stub.supplyBackendChatPrefills()
 	}
 
 	/**
@@ -117,12 +117,9 @@ export default class DOBackend extends WorkerEntrypoint<WorkerEnv> {
 	 * Refresh a disposable session — pushes the self-deletion alarm back by
 	 * 28 days and returns the current chat prefills.
 	 */
-	public async refreshDisposableSession(sessionId: string): Promise<{
-		threads: InferSelectModel<typeof schema.thread>[]
-	}> {
+	public async refreshDisposableSession(sessionId: string) {
 		const id = this.env.USERSPACE.idFromName(sessionId)
 		const stub = this.env.USERSPACE.get(id)
 		await stub.refreshDisposableAlarm()
-		return stub.supplyChatPrefills()
 	}
 }
