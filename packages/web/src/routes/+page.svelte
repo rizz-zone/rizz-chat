@@ -3,6 +3,8 @@
 	import { engine } from '$lib/sync'
 	import { TransitionAction } from '@rizz-zone/chat-shared'
 	import { TransitionImpact } from 'ground0'
+	import Root from '$lib/components/roots/Root.svelte'
+	import { PrimaryViewCategory } from '$lib/types/shallow_routing/PrimaryViewCategory'
 
 	const { data }: PageProps = $props()
 
@@ -21,8 +23,7 @@
 	})
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-	Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
-	documentation
-</p>
+<Root
+	prefills={data.chatPrefills}
+	initialViews={{ primary: { category: PrimaryViewCategory.Chat, page: undefined } }}
+/>

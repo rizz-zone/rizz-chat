@@ -1,3 +1,4 @@
+import type { Views } from '$lib/types/shallow_routing/Views'
 import type { DOBackend } from '@rizz-zone/chat-worker'
 import type { Session, User } from 'better-auth'
 
@@ -19,9 +20,11 @@ declare global {
 			session: Session
 			user: User
 		}
+		interface PageState {
+			views?: Partial<Views>
+		}
 		// interface Error {}
 		// interface PageData {}
-		// interface PageState {}
 		// interface Platform {}
 	}
 }
