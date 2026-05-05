@@ -11,7 +11,6 @@
         "wrangler": "catalog:wrangler"
     },
     "scripts": {
-        "prepare": "pnpm run types",
         "types": "wrangler types",
         "dev": "wrangler dev",
         "build": "wrangler build"
