@@ -1,0 +1,36 @@
+pnpm-workspace.yaml
+  fe6d6b139b59b724 6-7,9-10,15,17
+package.json
+  fe6d6b139b59b724 21-24,26-32
+packages/shared/package.json
+  fe6d6b139b59b724 13,15,18,22,24
+packages/web/src/routes/api/ws/+server.ts
+  fe6d6b139b59b724 2
+packages/worker/src/index.ts
+  fe6d6b139b59b724 18-30
+packages/web/package.json
+  fe6d6b139b59b724 23,31-35,37-38,41-46
+packages/worker/package.json
+  fe6d6b139b59b724 11,24
+packages/shared/src/auth_server.ts
+  fe6d6b139b59b724 2,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "c4ece5590c80a97bb51070bd01d6693b679c12aa",
+  "prompts": {
+    "fe6d6b139b59b724": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_20745a5d7ffeFN1quJwR7MizgK",
+        "model": "openrouter/openai/gpt-5.5"
+      },
+      "human_author": "ezShroom <68300730+ezShroom@users.noreply.github.com>",
+      "total_additions": 66,
+      "total_deletions": 58,
+      "accepted_lines": 55,
+      "overriden_lines": 1
+    }
+  }
+}
