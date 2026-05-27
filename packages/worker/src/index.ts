@@ -15,8 +15,19 @@ import {
 	type BackendTransitionHandlers
 } from 'ground0/durable_object'
 
-// Local Env type to avoid conflicts when imported from other packages
-type WorkerEnv = Cloudflare.Env
+type WorkerEnv = {
+	BASE_URL: string
+	BETTER_AUTH_SECRET: string
+	DATABASE_AUTH_TOKEN: string
+	DATABASE_URL: string
+	DISCORD_CLIENT_ID: string
+	DISCORD_CLIENT_SECRET: string
+	GOOGLE_CLIENT_ID: string
+	GOOGLE_CLIENT_SECRET: string
+	USERSPACE: DurableObjectNamespace<UserSpace>
+	X_API_KEY: string
+	X_API_SECRET: string
+}
 
 export class UserSpace extends SyncEngineBackend<AppTransition, AppUpdate> {
 	protected override engineDef = engineDef

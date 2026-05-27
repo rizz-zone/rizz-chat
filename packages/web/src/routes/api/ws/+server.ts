@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit'
-import type { RequestHandler } from '../../chat/$types'
+import type { RequestHandler } from './$types'
 
 export const GET: RequestHandler = async ({ platform, request }) => {
 	if (!platform) error(500, 'No platform!')

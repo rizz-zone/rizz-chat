@@ -3,18 +3,18 @@ packages:
 
 catalogs:
   better-auth:
-    better-auth: ^1.4.18
-    '@better-auth/passkey': ^1.4.18
+    '@better-auth/passkey': ^1.6.9
+    better-auth: ^1.6.9
   drizzle:
-    drizzle-kit: ^0.31.8
-    drizzle-orm: ^0.45.1
+    drizzle-kit: ^0.31.10
+    drizzle-orm: ^0.45.2
   ground0:
     '@ground0/adapter-svelte': ^0.1.2
     ground0: ^0.1.2
   wrangler:
-    wrangler: ^4.60.0
+    wrangler: ^4.87.0
   zod:
-    zod: ^3.25.76
+    zod: ^4.4.3
 
 onlyBuiltDependencies:
   - esbuild

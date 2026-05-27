@@ -8,6 +8,7 @@
         "typescript": "^5.7.3"
     },
     "devDependencies": {
+        "@types/node": "^25.6.0",
         "wrangler": "catalog:wrangler"
     },
     "scripts": {
@@ -20,7 +21,7 @@
         "./package.json": "./package.json"
     },
     "dependencies": {
-        "@libsql/client": "^0.15.15",
+        "@libsql/client": "^0.17.3",
         "@rizz-zone/chat-shared": "workspace:*",
         "better-auth": "catalog:better-auth",
         "drizzle-orm": "catalog:drizzle",

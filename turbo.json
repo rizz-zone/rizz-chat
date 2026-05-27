@@ -24,6 +24,9 @@
 		"check-types": {
 			"dependsOn": ["^build", "^check-types"],
 			"outputs": []
+		},
+		"types": {
+			"outputs": ["worker-configuration.d.ts"]
 		}
 	}
 }

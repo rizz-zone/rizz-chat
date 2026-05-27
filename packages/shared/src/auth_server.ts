@@ -1,5 +1,5 @@
 import { passkey } from '@better-auth/passkey'
-import { betterAuth } from 'better-auth'
+import { betterAuth, type Auth } from 'better-auth'
 import { drizzleAdapter, type DB } from 'better-auth/adapters/drizzle'
 import { lastLoginMethod } from 'better-auth/plugins'
 import * as schema from './db/schema'
@@ -16,7 +16,7 @@ export const genAuthServer = (
 		GOOGLE_CLIENT_ID: string
 		GOOGLE_CLIENT_SECRET: string
 	}
-) =>
+): Auth =>
 	betterAuth({
 		baseURL: baseUrl,
 		database: drizzleAdapter(db, {
